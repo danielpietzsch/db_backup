@@ -1,6 +1,6 @@
 # DB Backup
 
-Supplies a rake task to conveniently backup the database of your Rails app.  
+Adds a rake task to your Rails app to conveniently backup its database.  
 Only works with PostgreSQL at the moment.
 
 ## Usage
