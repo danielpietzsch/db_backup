@@ -3,6 +3,10 @@
 Adds a rake task to your Rails app to conveniently backup its database.  
 Only works with PostgreSQL at the moment.
 
+## Installation
+
+	script/plugin install git://github.com/pie4dan/db_backup.git
+
 ## Usage
 
 A backup will be created in `~/database_backups`. A backup is compressed by default (using [PostgreSQL's custom dump format](http://www.postgresql.org/docs/8.4/static/backup-dump.html "PostgreSQL: Documentation: Manuals: PostgreSQL 8.4: SQL Dump")).
