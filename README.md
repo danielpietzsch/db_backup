@@ -23,6 +23,13 @@ If you have capified your application, you can also use the capistrano recipe to
 	
 Note: the backups are stored on the remote server.
 
+## TODO
+
+ * Support for more databases
+ * Ability to overwrite the path where the backup is saved to
+ * Ability to add additional custom description to file name
+ * A rake task to restore backups
+
 ## Credits
 
 Inspiration taken from thoughbot's [limerick\_rake](https://github.com/thoughtbot/limerick_rake).
