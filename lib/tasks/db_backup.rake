@@ -35,4 +35,31 @@ namespace :db do
     end
   end # of task :backup
   
+  # TODO proper feedback, .backup file restore, improvements all around. This is just a first version
+  desc "Restores the database from a .sql or .backup file for the specified environment; will delete all existing data."
+  task :restore do
+    raise "You have to specify a file to restore. E.g.: file=~/my_database-2011-04-01-16-25-00.sql" if ENV['file'].nil?
+    
+    require 'ActiveRecord'
+    
+    Rake::Task['db:drop'].invoke
+    Rake::Task['db:create'].invoke
+    
+    config = ActiveRecord::Base.configurations[Rails.env || 'development']
+    psql   = `which psql`.strip
+    
+    options   =  "-U #{config['username']}"
+    options   += " -h #{config['host']}" if config['host']
+    options   += " -p #{config['port']}" if config['port']
+    
+    raise RuntimeError, "I only work with PostgreSQL." unless config['adapter'] == 'postgresql'
+    raise RuntimeError, "Cannot find psql command." if psql.blank?
+    
+    puts "export PGPASSWORD=#{config['password']} && #{psql} #{options} -f #{ENV['file']} #{config['database']}"
+    
+    success = system "export PGPASSWORD=#{config['password']} && #{psql} #{options} -f #{ENV['file']} #{config['database']}"
+    
+    puts "SUCCESS: #{success}"
+  end
+  
 end
