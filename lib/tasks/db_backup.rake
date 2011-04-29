@@ -1,6 +1,6 @@
 namespace :db do
   
-  desc "Backup the database specified with RAILS_ENV; stores it in ~/database_backups/db_name_timestamp.sql; use uncompressed format with compress=false."
+  desc "Backup the database specified with RAILS_ENV; stores it in ~/database_backups/db_name_timestamp.sql; use compressed format with compress=true."
   task :backup => :environment do
     config    = ActiveRecord::Base.configurations[Rails.env || 'development']
     filename  = "#{config['database']}_#{timestamp_for_time(Time.now)}"
@@ -42,7 +42,7 @@ namespace :db do
     
     puts
     puts "The following steps will be executed:"
-    puts "  1. Creation of backup of the existing database"
+    puts "  1. Creation of a backup of the existing database"
     puts "  2. Drop the existing database"
     puts "  3. Re-create and empty database"
     puts "  4. Database structure and data is restored from the file you specified."
