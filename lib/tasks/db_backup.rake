@@ -51,7 +51,7 @@ namespace :db do
     
     answer = STDIN.getc
 
-    unless answer == 121 # == y
+    unless answer == 'y' || answer == 121 # == y
       puts "Database restore cancelled."
       exit
     end
